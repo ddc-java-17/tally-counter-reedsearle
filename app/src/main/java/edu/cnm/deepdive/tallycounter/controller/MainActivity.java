@@ -21,18 +21,17 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-
     Log.d(TAG, "MainActivity::onCreate");
     setContentView(R.layout.activity_main);
     tally = findViewById(R.id.tally);
     if(savedInstanceState!=null){
       setCounter(savedInstanceState.getInt("counter",0));
     }else{
-      setCounter(0);
+      setCounter(1);
     }
     Button increment = findViewById(R.id.increment);
 
-    increment.setOnClickListener(v -> setCounter(counter + 1));
+//    increment.setOnClickListener(this::handleIncrement);
   }
 
   @Override
@@ -82,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
   protected void onDestroy() {
     super.onDestroy();
     Log.d(TAG, "MainActivity::OnDestroy");
+  }
+
+  public void handleIncrement(View v){
+    setCounter(counter + 1);
   }
 
   private void setCounter(int counter){
