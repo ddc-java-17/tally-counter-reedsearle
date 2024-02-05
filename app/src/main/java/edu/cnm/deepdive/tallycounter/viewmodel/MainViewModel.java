@@ -9,7 +9,7 @@ public class MainViewModel extends ViewModel {
   private final MutableLiveData<Integer> counter;
 
   public MainViewModel() {
-    counter = new MutableLiveData<>(2);
+    counter = new MutableLiveData<>(3);
   }
 
   public LiveData<Integer> getCounter() {
