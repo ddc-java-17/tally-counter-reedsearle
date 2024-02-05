@@ -12,20 +12,25 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     style="@style/TallyText"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintVertical_chainStyle="packed"
+    app:layout_constraintVertical_bias="0.47"
     app:layout_constraintTop_toTopOf="parent"
-    tools:text="100"/>
-  
+    app:layout_constraintBottom_toTopOf="@id/increment"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    tools:text="100"
+    />
+
   <Button
     android:id="@+id/increment"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/increment_label"
     android:onClick="handleIncrement"
+    android:text="@string/increment_label"
+    app:layout_constraintTop_toBottomOf="@id/tally"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tally"/>
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
