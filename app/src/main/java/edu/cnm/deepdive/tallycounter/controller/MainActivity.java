@@ -37,19 +37,17 @@ public class MainActivity extends AppCompatActivity {
     viewModel = new ViewModelProvider(this)
         .get(MainViewModel.class);
     viewModel
-        .getCounter()
-        .observe(this, this::setTallyDisplay);
-    viewModel
         .getSubtallies()
         .observe(this, (subtallies) ->
             binding.subtallies.setAdapter(new SubTalliesAdapter(this, subtallies)));
-    viewModel
-        .getTotal()
-        .observe(this, (total) -> binding.total.setText(String.valueOf(total)));
+
+    binding.setVm(viewModel);
+
   }
 
   private void setupUI() {
     binding = ActivityMainBinding.inflate(getLayoutInflater());
+    binding.setLifecycleOwner(this);
     setContentView(binding.getRoot());
   }
 }
