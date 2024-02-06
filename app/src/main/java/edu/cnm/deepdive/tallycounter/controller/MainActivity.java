@@ -1,19 +1,12 @@
 package edu.cnm.deepdive.tallycounter.controller;
 
-import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import edu.cnm.deepdive.tallycounter.R;
+import edu.cnm.deepdive.tallycounter.adapter.SubTalliesAdapter;
 import edu.cnm.deepdive.tallycounter.databinding.ActivityMainBinding;
 import edu.cnm.deepdive.tallycounter.viewmodel.MainViewModel;
-import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,22 +17,39 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    Log.d(TAG, "MainActivity::onCreate");
-    binding = ActivityMainBinding.inflate(getLayoutInflater());
-    setContentView(binding.getRoot());
-    viewModel = new ViewModelProvider(this)
-        .get(MainViewModel.class);
-    viewModel
-        .getCounter()
-        .observe(this, this::setTallyDisplay);
+    setupUI();
+    setupViewmodel();
   }
 
   public void handleIncrement(View v){
     viewModel.incrementCounterValue();
   }
 
+  public void captureSubtally(View v) {
+    viewModel.captureSubtally();
+  }
 
   private void setTallyDisplay(int counter){
     binding.tally.setText(String.valueOf(counter));
+  }
+
+  private void setupViewmodel() {
+    viewModel = new ViewModelProvider(this)
+        .get(MainViewModel.class);
+    viewModel
+        .getCounter()
+        .observe(this, this::setTallyDisplay);
+    viewModel
+        .getSubtallies()
+        .observe(this, (subtallies) ->
+            binding.subtallies.setAdapter(new SubTalliesAdapter(this, subtallies)));
+    viewModel
+        .getTotal()
+        .observe(this, (total) -> binding.total.setText(String.valueOf(total)));
+  }
+
+  private void setupUI() {
+    binding = ActivityMainBinding.inflate(getLayoutInflater());
+    setContentView(binding.getRoot());
   }
 }

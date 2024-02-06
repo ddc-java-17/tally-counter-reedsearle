@@ -8,11 +8,11 @@
   tools:context=".controller.MainActivity">
 
   <androidx.constraintlayout.widget.Guideline
-    android:id="@+id/horizontal_guideline"
+    android:id="@+id/verticle_guideline"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    app:layout_constraintGuide_percent="0.35"
+    android:orientation="vertical"
+    app:layout_constraintGuide_percent="0.5"
     />
 
   <TextView
@@ -21,11 +21,10 @@
     android:layout_height="wrap_content"
     style="@style/TallyText"
     app:layout_constraintVertical_chainStyle="packed"
-    app:layout_constraintVertical_bias="0.33"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toTopOf="@id/increment"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/verticle_guideline"
     tools:text="100"
     />
 
@@ -38,7 +37,7 @@
     app:layout_constraintTop_toBottomOf="@id/tally"
     app:layout_constraintBottom_toTopOf="@+id/capture_subtally"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/verticle_guideline"
     />
 
   <Button
@@ -48,7 +47,7 @@
     android:text="@string/subtally_label"
     android:onClick="captureSubtally"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/verticle_guideline"
     app:layout_constraintTop_toBottomOf="@+id/increment"
     app:layout_constraintBottom_toTopOf="@+id/total"
     />
@@ -58,21 +57,22 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     style="@style/TotalText"
-    app:layout_constraintTop_toBottomOf="@+id/capture_subtally"
-    app:layout_constraintBottom_toTopOf="@+id/horizontal_guideline"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/verticle_guideline"
+    app:layout_constraintTop_toBottomOf="@+id/capture_subtally"
+    app:layout_constraintBottom_toBottomOf="parent"
     tools:text="1000"
     />
+
 
   <ListView
     android:id="@+id/subtallies"
     android:layout_width="0dp"
     android:layout_height="0dp"
     android:orientation="vertical"
-    app:layout_constraintTop_toBottomOf="@+id/horizontal_guideline"
+    app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintStart_toEndOf="@id/verticle_guideline"
     app:layout_constraintEnd_toEndOf="parent"
     tools:listitem="@layout/item_subtally"
     />
